@@ -1,0 +1,542 @@
+{
+  "info": {
+    "_postman_id": "b7dd4e1b-417a-4ead-913a-d6b51bf14dac",
+    "name": "Syntecxhub Image CRUD API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59250906",
+    "_collection_link": "https://go.postman.co/collection/59250906-b7dd4e1b-417a-4ead-913a-d6b51bf14dac?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Check API Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000"
+        }
+      },
+      "response": [
+        {
+          "name": "Check API Status",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000"
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "49"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"31-FFEiZCgCr8EnhP2LdtJIa+1ReD8\""
+            },
+            {
+              "key": "date",
+              "value": "Wed, 28 Oct 2026 13:53:55 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"File / Image Upload API is running!\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Upload Profile Image",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const response = pm.response.json();\n\npm.test(\"Image uploaded successfully\", function () {\n    pm.response.to.have.status(201);\n    pm.expect(response.success).to.eql(true);\n});\n\nif (response.file) {\n    pm.environment.set(\"fileId\", response.file._id);\n    pm.environment.set(\"imageUrl\", response.file.url);\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "description": "test-image.png",
+              "src": [
+                ""
+              ]
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/upload",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "upload"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "All Uploaded Files",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/files",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "files"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "All Uploaded Files",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/files",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "files"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "456"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"1c8-hQzzGjRev3abZNyVH6vdT9DmFds\""
+            },
+            {
+              "key": "date",
+              "value": "Wed, 28 Oct 2026 16:20:53 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"count\": 1,\n  \"files\": [\n    {\n      \"_id\": \"6ae21ae4b3304599315fcdb1\",\n      \"filename\": \"1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png\",\n      \"originalName\": \"test-image.png\",\n      \"path\": \"uploads/1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png\",\n      \"url\": \"http://localhost:5000/uploads/1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png\",\n      \"mimetype\": \"image/png\",\n      \"size\": 713,\n      \"createdAt\": \"2026-10-28T15:55:16.933Z\",\n      \"updatedAt\": \"2026-10-28T15:55:16.933Z\",\n      \"__v\": 0\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "File By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/files/6ae21ae4b3304599315fcdb1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "files",
+            "6ae21ae4b3304599315fcdb1"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "File By ID",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/files/6ae21ae4b3304599315fcdb1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "files",
+                "6ae21ae4b3304599315fcdb1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "443"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"1bb-3nbb8RSBhKH6U9yA8FWBY+Mx4e8\""
+            },
+            {
+              "key": "date",
+              "value": "Wed, 28 Oct 2026 16:23:37 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"file\": {\n    \"_id\": \"6ae21ae4b3304599315fcdb1\",\n    \"filename\": \"1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png\",\n    \"originalName\": \"test-image.png\",\n    \"path\": \"uploads/1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png\",\n    \"url\": \"http://localhost:5000/uploads/1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png\",\n    \"mimetype\": \"image/png\",\n    \"size\": 713,\n    \"createdAt\": \"2026-10-28T15:55:16.933Z\",\n    \"updatedAt\": \"2026-10-28T15:55:16.933Z\",\n    \"__v\": 0\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Open Uploaded Image",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/uploads/1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "uploads",
+            "1793202916828-6f8ad04f-961c-4f81-a21a-7d9e3af30fc2.png"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "No File Selected",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/upload",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "upload"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "No File Selected",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/upload",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "upload"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "63"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"3f-J+DGceJsO4dPQ8+DgJ70Bs3SdQw\""
+            },
+            {
+              "key": "date",
+              "value": "Wed, 28 Oct 2026 16:40:20 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Please select an image to upload.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Invalid File ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/files/invalid-id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "files",
+            "invalid-id"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Invalid File ID",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/files/invalid-id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "files",
+                "invalid-id"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "30"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"1e-2rkZ0cfVg6g08FZULCIr45pTQc4\""
+            },
+            {
+              "key": "date",
+              "value": "Wed, 28 Oct 2026 17:02:26 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Invalid file ID.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Missing File",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Missing file returns 404\", function () {\n    pm.response.to.have.status(404);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/files/000000000000000000000000",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "files",
+            "000000000000000000000000"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Missing File",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/files/000000000000000000000000",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "files",
+                "000000000000000000000000"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "29"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"1d-vi+hCGtz7I4LsPT9ccG2HL2QLjo\""
+            },
+            {
+              "key": "date",
+              "value": "Wed, 28 Oct 2026 17:03:29 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"File not found.\"\n}"
+        }
+      ]
+    }
+  ]
+}
